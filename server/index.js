@@ -1,0 +1,38 @@
+require('dotenv').config();
+const connectDB=require('./db/Database')
+const express=require('express')
+const cookieParser = require('cookie-parser');
+const app= express()
+const port = process.env.PORT || 8000;
+const cors = require("cors");
+
+// connect to database
+connectDB();
+app.use(express.json());
+app.use(cookieParser());
+
+app.use(
+    cors({
+      origin: "http://localhost:3000",
+      credentials: true,
+    })
+  );
+  app.use("/", express.static("uploads"));
+app.listen(port , ()=>{
+    console.log(`listening on port ${port}`)
+})
+
+// call api 
+const user= require('./Controller/UserController')
+const Question= require('./Controller/Questions');
+const ErrorHandler = require('./Utils/ErrorHandler');
+const Quiz = require('./Controller/Quiz');
+const GameResult = require('./Controller/Game');
+
+app.use("/api/v2/user" , user)
+app.use("/api/v2/Question" , Question)
+app.use("/api/v2/Quiz" , Quiz)
+app.use("/api/v2/GameResult" , GameResult)
+
+// it's for ErrorHandling
+app.use(ErrorHandler);
