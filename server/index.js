@@ -11,12 +11,7 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(
-    cors({
-      origin: true,
-      credentials: true,
-    })
-  );
+app.use( );
   app.use("/", express.static("uploads"));
 app.listen(port , ()=>{
     console.log(`listening on port ${port}`)
