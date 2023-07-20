@@ -16,7 +16,9 @@ app.use( );
 app.listen(port , ()=>{
     console.log(`listening on port ${port}`)
 })
-
+app.get('/' , (req ,res)=>{
+  res.json("Hello api")
+})
 // call api 
 const user= require('./Controller/UserController')
 const Question= require('./Controller/Questions');
