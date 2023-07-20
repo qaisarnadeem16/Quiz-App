@@ -11,7 +11,12 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use( );
+app.use(
+    cors({
+      origin: https://quizapp-black.vercel.app/,
+      credentials: true,
+    })
+);
   app.use("/", express.static("uploads"));
 app.listen(port , ()=>{
     console.log(`listening on port ${port}`)
