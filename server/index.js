@@ -13,7 +13,7 @@ app.use(cookieParser());
 
 app.use(
     cors({
-      origin: "https://quizapp-black.vercel.app",
+      origin: "*",
       credentials: true,
     })
   );
