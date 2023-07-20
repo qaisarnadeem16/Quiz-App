@@ -4,7 +4,9 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { server } from '../server';
 import { useSelector } from 'react-redux';
-
+import { RiDeleteBin6Line } from 'react-icons/ri'
+import { MdOutlineModeEditOutline } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,9 +15,11 @@ const UserSheduleQuiz = () => {
     const itemsPerPage = 7;
     const { user } = useSelector((state) => state.user);
     const [quizzes, SetQuizzes] = useState([]);
-    const id=user._id;
+    const id = user._id;
+    const Navigate = useNavigate()
     useEffect(() => {
         fetchQuestions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // fetch all questions
@@ -29,8 +33,20 @@ const UserSheduleQuiz = () => {
         }
     };
 
-
-
+    // delete a question
+    const deleteQuiz = async (questionId) => {
+        try {
+            await axios.delete(`${server}/Quiz/deleteQuiz/${questionId}`);
+            fetchQuestions(); // Fetch updated questions after deletion
+            toast.success('Quiz deleted successfully');
+        } catch (error) {
+            toast.error(error);
+        }
+    };
+    // edit questions
+    const editQuiz = (id) => {
+        Navigate(`/dashboard/editQuiz/${id}`);
+    };
 
 
     const totalPages = Math.ceil(quizzes?.length / itemsPerPage);
@@ -59,21 +75,32 @@ const UserSheduleQuiz = () => {
                                 <th className="py-2 px-2 text-md font-medium border">Quiz Type</th>
                                 <th className="py-2 px-2 text-md font-medium border">Questions</th>
                                 <th className="py-2 px-2 text-md font-medium border">Registration fee</th>
-                                <th className="py-2 px-2 text-md font-medium border">Winner</th>
-                                <th className="py-2 px-2 text-md font-medium border">Rank of All User</th>
+                                {/* <th className="py-2 px-2 text-md font-medium border">Winner</th> */}
+                                <th className="py-2 px-2 text-md font-medium border"></th>
                             </tr>
                         </thead>
                         <tbody className="text-center">
                             {currentItems.map((quiz) => (
-                                <tr key={quiz._id}>
+                                <tr key={quiz.id}>
                                     <td className="py-2 px-4 border text-left">{quiz.title}</td>
                                     <td className="py-2 px-4 border">{quiz?.user?.firstName}</td>
                                     <td className="py-2 px-4 border">{quiz?.user?.realQzeto}</td>
                                     <td className="py-2 px-4 border">{quiz.type}</td>
                                     <td className="py-2 px-4 border">{quiz.quizQuestions.length}</td>
                                     <td className="py-2 px-4 border">{quiz.registrationFee}</td>
-                                    <td className="py-2 px-4 border">-</td>
-                                    <td className="py-2 px-4 border">-</td>
+                                    {/* <td className="py-2 px-4 border">-</td> */}
+                                    <td className="py-2 px-4 border flex gap-3">
+                                        <button
+                                            className="rounded-full bg-[#E32828] text-white p-1"
+                                            onClick={() => deleteQuiz(quiz.id)}
+                                        >
+                                            <RiDeleteBin6Line />
+                                        </button>
+
+                                        <button className="rounded-full bg-[#FFB125] text-white p-1">
+                                            <MdOutlineModeEditOutline onClick={() => editQuiz(quiz.id)} />
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

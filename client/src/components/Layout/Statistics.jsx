@@ -23,6 +23,7 @@ const Statistics = () => {
         fetchPlayedQuiz();
         fetchTotalQuestion();
         setLastUpdated(new Date());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // fetch all Quiz

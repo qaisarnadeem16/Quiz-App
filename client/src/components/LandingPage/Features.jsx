@@ -22,9 +22,9 @@ const Features = () => {
                     <div className="md:w-[451px] w-full bg-[#00459E] rounded-lg flex flex-col p-5 gap-5 text-white relative">
 
                         <img src={alarm} alt="" className=" w-[70px]" />
-                        <p className=" text-[26px] font-[700]">Image, Audio & Video Answers
+                        <p className=" text-[26px] font-[700]">Quiz Creation and Management:
                         </p>
-                        <p className="text-[26px] w-[90%] font-[500] py-2">Mauris purus leo, volutpat dapibus sagitt scelerisque pharetra odio. Sed dictum, nunc sed congue cursus, mauris.</p>
+                        <p className="text-[26px] w-[90%] font-[500] py-2">Provide an interface for quiz creators to design and organize quizzes.</p>
 
                         <p className=" text-lg font-medium flex items-center gap-2 py-2">Read More <MdOutlineNavigateNext className='!text-white text-2xl' /></p>
                         <img src={alarm2} alt="" className="w-[150px] absolute bottom-0 right-16" />
@@ -33,9 +33,9 @@ const Features = () => {
                     <div className="md:w-[451px] w-full bg-[#282C46] rounded-lg flex flex-col p-5 gap-5 text-white relative">
 
                         <img src={alarm} alt="" className=" w-[70px]" />
-                        <p className=" text-[26px] font-[700]">Image, Audio & Video Answers
+                        <p className=" text-[26px] font-[700]">Multiple Question Types
                         </p>
-                        <p className="text-[26px] w-[90%] font-[500] py-2">Mauris purus leo, volutpat dapibus sagitt scelerisque pharetra odio. Sed dictum, nunc sed congue cursus, mauris.</p>
+                        <p className="text-[26px] w-[90%] font-[500] py-2">Support various question formats, such as multiple-choice, true/false, fill in the blanks, matching, and open-ended questions.</p>
 
                         <p className=" text-lg font-medium flex items-center gap-2 py-2">Read More <MdOutlineNavigateNext className='!text-white text-2xl' /></p>
                         <img src={alarm2} alt="" className="w-[150px] absolute bottom-0 right-16" />
@@ -44,9 +44,9 @@ const Features = () => {
                     <div className="md:w-[451px] w-full bg-[#00459E] rounded-lg flex flex-col p-5 gap-5 text-white relative">
 
                         <img src={alarm} alt="" className=" w-[70px]" />
-                        <p className=" text-[26px] font-[700]">Image, Audio & Video Answers
+                        <p className=" text-[26px] font-[700]">Leaderboard and Rankings:
                         </p>
-                        <p className="text-[26px] w-[90%] font-[500] py-2">Mauris purus leo, volutpat dapibus sagitt scelerisque pharetra odio. Sed dictum, nunc sed congue cursus, mauris.</p>
+                        <p className="text-[26px] w-[90%] font-[500] py-2">Implement a leaderboard to showcase top performers or highest scorers.</p>
 
                         <p className=" text-lg font-medium flex items-center gap-2 py-2">Read More <MdOutlineNavigateNext className='!text-white text-2xl' /></p>
                         <img src={alarm2} alt="" className="w-[150px] absolute bottom-0 right-16" />
@@ -56,9 +56,9 @@ const Features = () => {
                     <div className="md:w-[451px] w-full bg-[#282C46] rounded-lg flex flex-col p-5 gap-5 text-white relative">
 
                         <img src={alarm} alt="" className=" w-[70px]" />
-                        <p className=" text-[26px] font-[700]">Image, Audio & Video Answers
+                        <p className=" text-[26px] font-[700]">Analytics and Insights
                         </p>
-                        <p className="text-[26px] w-[90%] font-[500] py-2">Mauris purus leo, volutpat dapibus sagitt scelerisque pharetra odio. Sed dictum, nunc sed congue cursus, mauris.</p>
+                        <p className="text-[26px] w-[90%] font-[500] py-2"> Collect data on user behavior, quiz performance, and user preferences. Analyze this data to gain insights</p>
 
                         <p className=" text-lg font-medium flex items-center gap-2 py-2">Read More <MdOutlineNavigateNext className='!text-white text-2xl' /></p>
                         <img src={alarm2} alt="" className="w-[150px] absolute bottom-0 right-16" />
@@ -67,9 +67,9 @@ const Features = () => {
                     <div className="md:w-[451px] w-full bg-[#00459E] rounded-lg flex flex-col p-5 gap-5 text-white relative">
 
                         <img src={alarm} alt="" className=" w-[70px]" />
-                        <p className=" text-[26px] font-[700]">Image, Audio & Video Answers
+                        <p className=" text-[26px] font-[700]">Progress Tracking:
                         </p>
-                        <p className="text-[26px] w-[90%] font-[500] py-2">Mauris purus leo, volutpat dapibus sagitt scelerisque pharetra odio. Sed dictum, nunc sed congue cursus, mauris.</p>
+                        <p className="text-[26px] w-[90%] font-[500] py-2"> Enable users to track their quiz history, including completed quizzes, scores, and performance analytics.</p>
 
                         <p className=" text-lg font-medium flex items-center gap-2 py-2">Read More <MdOutlineNavigateNext className='!text-white text-2xl' /></p>
                         <img src={alarm2} alt="" className="w-[150px] absolute bottom-0 right-16" />
@@ -78,9 +78,9 @@ const Features = () => {
                     <div className="md:w-[451px] w-full bg-[#282C46] rounded-lg flex flex-col p-5 gap-5 text-white relative">
 
                         <img src={alarm} alt="" className=" w-[70px]" />
-                        <p className=" text-[26px] font-[700]">Image, Audio & Video Answers
+                        <p className=" text-[26px] font-[700]">Mobile-Friendly Design:
                         </p>
-                        <p className="text-[26px] w-[90%] font-[500] py-2">Mauris purus leo, volutpat dapibus sagitt scelerisque pharetra odio. Sed dictum, nunc sed congue cursus, mauris.</p>
+                        <p className="text-[26px] w-[90%] font-[500] py-2"> Optimize the app for mobile devices, ensuring a responsive and user-friendly interface. This enables users to access quizzes anytime,.</p>
 
                         <p className=" text-lg font-medium flex items-center gap-2 py-2">Read More <MdOutlineNavigateNext className='!text-white text-2xl' /></p>
                         <img src={alarm2} alt="" className="w-[150px] absolute bottom-0 right-16" />

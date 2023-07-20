@@ -18,6 +18,7 @@ const QuizCard = (props) => {
     //check registration
     useEffect(() => {
         checkRegistrationStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const checkRegistrationStatus = async () => {
@@ -86,6 +87,8 @@ const QuizCard = (props) => {
         });
         setIsRegistered(true);
         toast.success('User registered successfully');
+        setPopup(false); // Close the popup if it was open
+
       } else {
         // User's free Qzeto balance is insufficient
         toast.error('Insufficient balance');

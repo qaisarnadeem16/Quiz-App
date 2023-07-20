@@ -20,15 +20,18 @@ const QuizPlay = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [score, setScore] = useState(0);
   const [countdown, setCountdown] = useState(60);
+  const [loading, setLoading] = useState(false);
  
   //fetch questions
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
+        setLoading(true)
         const response = await axios.get(`${server}/Quiz/get-questions/${id}`);
         const { questions, quiz } = response.data;
         setQuestions(questions);
         setQuiz(quiz);
+        setLoading(false);
       } catch (error) {
         toast.error(error.message); // Use error.message instead of just error
         // Handle error
@@ -50,52 +53,73 @@ const QuizPlay = () => {
     return () => {
       clearInterval(countdownInterval);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countdown]);
 
-
-  //next question
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     // Check if an option is selected
     if (selectedOption !== null) {
       // Check if the selected option is correct
       const currentQuestion = questions[currentQuestionIndex];
       const isCorrect = currentQuestion.correctAnswer === selectedOption;
-
+  
+      // Update the selected answer and correctness for the current question
+      const updatedQuestions = [...questions];
+      updatedQuestions[currentQuestionIndex] = {
+        ...currentQuestion,
+        selectedAnswer: selectedOption,
+        isCorrect: isCorrect,
+      };
+  
       // Update the score
       if (isCorrect) {
         setScore(score + 1);
-      } else {
-        console.log('');
       }
-
-      // Move to the next question
+  
+      // Update the questions array
+      setQuestions(updatedQuestions);
+  
+      // Move to the next question or end the quiz
       if (currentQuestionIndex + 1 < questions.length) {
         setSelected(0); // Reset the selected option
         setSelectedOption(null);
         setCurrentQuestionIndex(currentQuestionIndex + 1);
       } else {
         // No more questions, quiz ended
-        handleQuizEnd()
+        await handleQuizEnd();
       }
     }
   };
-
+  
+  
+  
+  
 // store record of quiz
 const handleQuizEnd = async () => {
   const gameResultData = {
     userId: user._id, // Replace with the actual user ID
     quizId: id,
-    questions: questions.map((question) => ({
-      question: question.question,
-      selectedAnswer: selectedOption,
-      isCorrect: selectedOption === question.correctAnswer
-    })),
+    questions: questions.map((question, index) => {
+      if (index === currentQuestionIndex) {
+        return {
+          ...question,
+          selectedAnswer: selectedOption,
+          isCorrect: question.correctAnswer === selectedOption,
+        };
+      } else {
+        return {
+          question: question.question,
+          selectedAnswer: question.selectedAnswer,
+          isCorrect: question.isCorrect,
+        };
+      }
+    }),
+    
     totalScore: score,
     totalCorrectAnswers: score,
     totalWrongAnswers: questions.length - score,
     totalNotAttempted: questions.length - currentQuestionIndex - 1
   };
-
   try {
     // Send the game result to the server
 
@@ -112,8 +136,15 @@ const handleQuizEnd = async () => {
 
 
 
+  if (loading === true) {
+    return <div className='text-4xl text-center text-blue-500 flex justify-center items-center'>Loading.....</div>; 
+  }
+
+  
   if (questions.length === 0) {
-    return <div className='text-4xl text-center text-blue-500'>Loading...</div>; // Display a loading state while fetching questions
+    Navigate('/dashboard')
+    // toast.error(' No Question in this Quiz Exist')
+
   }
 
   const currentQuestion = questions[currentQuestionIndex];

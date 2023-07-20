@@ -5,33 +5,39 @@ import hand from '../../Assets/hand-gesture.png'
 import dollar from '../../Assets/dollar.png'
 // import profile from '../../Assets/Ellipse 1.png'
 import { IoAddCircleSharp } from 'react-icons/io5'
+import { AiFillEdit } from 'react-icons/ai'
 import { BiTime } from 'react-icons/bi'
+import { MdOutlineLogout } from 'react-icons/md'
 import { useSelector } from "react-redux";
 import { CgMenuLeft } from 'react-icons/cg'
 import { Link, useNavigate } from 'react-router-dom'
 import { backend_url } from '../../server'
-import axios from 'axios';
-import { server } from '../../server';
 import { toast } from 'react-toastify'
+import axios from '../../services'
 
 const MenuBar = ({ onToggleSidebar, active, setActive }) => {
     const { user } = useSelector((state) => state.user);
     const [open, setOpen] = useState(false)
-    const Navigate=useNavigate()
+    const Navigate = useNavigate()
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
     const handleButtonClick = () => {
         setIsProfileMenuOpen(!isProfileMenuOpen);
     };
 
-    const LogOut = async () => {
+    const logout = async () => {
         try {
-            await axios.get(`${server}/user/logout`);
-            toast.success('Logout Successfully')
-            Navigate('/login')
+            await axios.get(`/user/logout`)
+            toast.success('Logout Successfully');
+            Navigate('/login');
         } catch (error) {
-            toast.error(error)
+            toast.error(error.message);
         }
     };
+
+
+
+
+
     return (
         <>
 
@@ -89,7 +95,7 @@ const MenuBar = ({ onToggleSidebar, active, setActive }) => {
                         }
 
                         <div className="profileName px-1 hidden md:flex flex-col  font-bold text-[#003881]">
-                            <span>{user.firstName}{user.lastName}</span>
+                            <span>{user.firstName}_{user.lastName}</span>
                             <span className="ms-8 text-[10px]">{user.role}</span>
                         </div>
                         <div className="rounded-full relative">
@@ -101,11 +107,17 @@ const MenuBar = ({ onToggleSidebar, active, setActive }) => {
                 </div>
 
                 {isProfileMenuOpen && (
-                    <div className="absolute bg-opacity-50 right-3  bottom-[-55px]">
-                        <div className="w-24 px-2 flex flex-col items-start bg-white shadow-md text-black rounded-md p-1">
+                    <div className="absolute bg-opacity-50 right-5  bottom-[-90px]">
+                        <div className="w-40 px-2 flex flex-col items-center gap-2 bg-white text-black rounded-md p-1 py-3 shadow-2xl">
 
-                            <Link to='/dashboard/profile' className='border-b border-gray-300'>Edit Profile</Link>
-                            <button className="hover:text-blue-300 hover:text-md" onClick={LogOut}>Logout</button>
+                            <Link to='/dashboard/profile' className='w-full border-b border-gray-300 flex gap-2 items-center hover:bg-gray-400 px-2 py-1 rounded-sm'>
+                                <AiFillEdit />
+                                <div className="">Edit Profile</div>
+                            </Link>
+                            <div to='/dashboard/profile' className='w-full border-gray-300 flex gap-2 items-center hover:bg-gray-400 px-2 py-1 rounded-sm' onClick={logout}>
+                                <MdOutlineLogout />
+                                <div className="">Logout</div>
+                            </div>
                         </div>
                     </div>
                 )}

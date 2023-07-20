@@ -15,6 +15,7 @@ const WatchQuestion = () => {
   
     useEffect(() => {
       fetchQuestion();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
   
     const fetchQuestion = async () => {
@@ -39,8 +40,8 @@ const WatchQuestion = () => {
     onSubmit: async (values) => {
       console.log(values);
       try {
-        const response = await axios.put(`${server}/Question/updateQuestion/${id}`, values);
-        const updatedQuestion = response.data.question;
+         await axios.put(`${server}/Question/updateQuestion/${id}`, values);
+        // const updatedQuestion = response.data.question;
         toast.success('Question updated successfully');
         formik.resetForm();
         Navigate('/dashboard');

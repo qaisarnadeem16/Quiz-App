@@ -20,6 +20,9 @@ import AdminQuiz from './pages/AdminQuiz';
 import UserSheduleQuiz from './pages/UserSheduleQuiz';
 import PlayedQuiz from './pages/PlayedQuiz';
 import UserWallet from './pages/UserWallet';
+import EditQuiz from './components/QuizShedule/EditQuiz';
+import AddQuizPkg from './pages/AddQuizPkg';
+import UserJoinPkg from './pages/UserJoinPkg';
 
 function App() {
   useEffect(() => {
@@ -110,6 +113,24 @@ function App() {
           <Route path="/dashboard/wallet" element={
             <ProtectedRoute>
               < UserWallet />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/dashboard/editQuiz/:id" element={
+            <ProtectedRoute>
+              < EditQuiz />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/dashboard/addQuizPkg" element={
+            <ProtectedRoute>
+              < AddQuizPkg />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/dashboard/userJoinPkg" element={
+            <ProtectedRoute>
+              < UserJoinPkg />
             </ProtectedRoute>
           } />
 

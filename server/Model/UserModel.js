@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema({
     },
     profilePic: {
         type: String,
-        default: 'img-1688728469532-458554735.png'
+        default: 'download-1689681583693-456600974.png'
       },      
     userName: {
         type: String,

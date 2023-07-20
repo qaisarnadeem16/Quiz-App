@@ -47,22 +47,53 @@ router.post('/create-user', async (req, res, next) => {
 });
 
 
-//login the user
+// //login the user
+// router.post('/login-user', async (req, res, next) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     if (!email || !password) {
+//       return next(new ErrorHandler("Please provide the all fields!", 400));
+//     }
+
+//     const user = await User.findOne({ email }).select("+password")
+
+//     if (!user) {
+//       return next(new ErrorHandler("User doesn't exists!", 400));
+//     }
+
+//     const isPasswordValid = await user.comparePassword(password)
+
+//     if (!isPasswordValid) {
+//       return next(
+//         new ErrorHandler("Please provide the correct information", 400)
+//       );
+//     }
+
+//     sendToken(user, 201, res);
+
+//   } catch (error) {
+//     return next(new ErrorHandler(error.message, 500));
+
+//   }
+// })
+
+// login the user
 router.post('/login-user', async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return next(new ErrorHandler("Please provide the all fields!", 400));
+      return next(new ErrorHandler("Please provide all fields!", 400));
     }
 
-    const user = await User.findOne({ email }).select("+password")
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      return next(new ErrorHandler("User doesn't exists!", 400));
+      return next(new ErrorHandler("User doesn't exist!", 400));
     }
 
-    const isPasswordValid = await user.comparePassword(password)
+    const isPasswordValid = await user.comparePassword(password);
 
     if (!isPasswordValid) {
       return next(
@@ -70,13 +101,27 @@ router.post('/login-user', async (req, res, next) => {
       );
     }
 
-    sendToken(user, 201, res);
+    // Check if the user logged in after 7 days
+    const lastLogin = user.lastLogin; // Assuming lastLogin is stored in the user document
 
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    if (lastLogin < sevenDaysAgo) {
+      // Add 20 bonusQzeto to the user's account
+      User.bonusQzeto += 20;
+    }
+
+    // Update the last login date to the current time
+    User.lastLogin = new Date();
+    await user.save();
+
+    sendToken(user, 201, res);
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
-
   }
-})
+});
+
 
 
 // getuser
@@ -147,8 +192,6 @@ router.put('/updateUser', async (req, res , next) => {
 
 
 
-// update user profile pic
-
 router.put('/update-profilePic', upload.single('profilePic'), async (req, res, next) => {
   try {
     const { userId } = req.body;
@@ -160,12 +203,11 @@ router.put('/update-profilePic', upload.single('profilePic'), async (req, res, n
 
     // Check if the user has a profile picture to delete
     if (existsUser.profilePic) {
-      const existAvatarPath = `uploads/${existsUser.profilePic}`;
+      const existAvatarPath = path.join('uploads', existsUser.profilePic);
       fs.unlinkSync(existAvatarPath);
     }
 
-    const fileUrl = path.join(req.file.filename);
-
+    const fileUrl = req.file.filename;
     existsUser.profilePic = fileUrl;
     await existsUser.save();
 
@@ -195,10 +237,7 @@ router.get('/getAllUsers', async (req, res, next) => {
 // logout  
 router.get('/logout'  , async(req, res, next)=>{
   try {
-    res.cookie("token", null ,{
-      expiresIn: new Date(0),
-      httpOnly: true
-    })
+    res.clearCookie('token');
 
     res.status(201).json({
       success: true,

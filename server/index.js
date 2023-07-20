@@ -28,11 +28,13 @@ const Question= require('./Controller/Questions');
 const ErrorHandler = require('./Utils/ErrorHandler');
 const Quiz = require('./Controller/Quiz');
 const GameResult = require('./Controller/Game');
+const QuizPkg = require('./Controller/QuizPkg');
 
 app.use("/api/v2/user" , user)
 app.use("/api/v2/Question" , Question)
 app.use("/api/v2/Quiz" , Quiz)
 app.use("/api/v2/GameResult" , GameResult)
+app.use("/api/v2/QuizPkg" , QuizPkg)
 
 // it's for ErrorHandling
 app.use(ErrorHandler);

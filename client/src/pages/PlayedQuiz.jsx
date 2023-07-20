@@ -14,6 +14,7 @@ const PlayedQuiz = () => {
 
   useEffect(() => {
     fetchQuizzes();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Fetch all played quizzes
@@ -57,11 +58,11 @@ const PlayedQuiz = () => {
               </tr>
             </thead>
             <tbody className="text-center">
-              {quizzes.length === 0 ? (
+              {currentItems.length === 0 ? (
                 <p>No quizzes played by the user.</p>
               ) : (
                 
-                  quizzes.map((quiz) => (
+                currentItems.map((quiz) => (
                     <tr key={quiz._id}>
                       <td className="py-2 px-4 border text-left">{quiz.quizId.title}</td>
                       <td className="py-2 px-4 border">{quiz.quizId.category}</td>

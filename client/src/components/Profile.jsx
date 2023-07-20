@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import DashBoard from '../pages/DashBoard'
-import img from '../Assets/Ellipse 3.png'
+// import img from '../Assets/Ellipse 3.png'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -158,7 +158,7 @@ const Profile = () => {
                                         onChange={formik.handleChange}
                                         className="w-full border-0 bg-[#F5F5F5] px-2 py-1 rounded"
                                         placeholder=""
-                                        value={user.firstName}
+                                        value={formik.values.firstName}
                                     />
                                 </div>
 
@@ -173,7 +173,7 @@ const Profile = () => {
                                         onChange={formik.handleChange}
                                         className="w-full border-0 bg-[#F5F5F5] px-2 py-1 rounded"
                                         placeholder=""
-                                        value={user.lastName}
+                                        value={formik.values.lastName}
                                     />
                                 </div>
 
@@ -207,7 +207,7 @@ const Profile = () => {
                                         onChange={formik.handleChange}
                                         className="w-full border-0 bg-[#F5F5F5] px-2 py-1 rounded"
                                         placeholder=""
-                                        value={user.email}
+                                        value={formik.values.email}
                                     />
                                 </div>
 
@@ -227,7 +227,7 @@ const Profile = () => {
                                         onChange={formik.handleChange}
                                         className="w-full border-0 bg-[#F5F5F5] px-2 py-1 rounded"
                                         placeholder=""
-                                        value={user.address}
+                                        value={formik.values.address}
                                     />
                                 </div>
 
@@ -243,7 +243,7 @@ const Profile = () => {
                                         onChange={formik.handleChange}
                                         className="w-full border-0 bg-[#F5F5F5] px-2 py-1 rounded"
                                         placeholder=""
-                                        value={user.city}
+                                        value={formik.values.city}
                                     />
                                 </div>
 
@@ -260,7 +260,7 @@ const Profile = () => {
                                         onChange={formik.handleChange}
                                         className="w-full border-0 bg-[#F5F5F5] px-2 py-1 rounded"
                                         placeholder=""
-                                        value={user.state}
+                                        value={formik.values.state}
                                     />
                                 </div>
 

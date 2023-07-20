@@ -74,8 +74,8 @@ router.post('/storeRecord', async (req, res) => {
 
 router.get('/getPlayedQuiz/:id', async (req, res , next) => {
   try {
-    const id = req.params;
-    const gameResult = await GameResult.find().populate('quizId');
+    const id = req.params.id;
+    const gameResult = await GameResult.find({userId: id}).populate('quizId');
 
     if (!gameResult) {
       return res.status(404).json({ message: 'Game result not found' });

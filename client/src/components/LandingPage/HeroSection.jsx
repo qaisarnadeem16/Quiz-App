@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import hero from '../../Assets/hero.PNG'
+import { Link } from 'react-router-dom'
 
 const HeroSection = () => {
     return (
@@ -22,8 +23,8 @@ const HeroSection = () => {
 
 
                         <div className="py-4 flex gap-5">
-                            <button className="rounded text-white md:text-lg text-md font-semibold bg-[#F89820] md:px-8 px-5 py-3">Get Started</button>
-                            <button className="rounded text-black text-lg font-medium bg-white md:px-8 px-5 py-3">Request a demo</button>
+                            <Link to='/dashboard' className="rounded text-white md:text-lg text-md font-semibold bg-[#F89820] md:px-8 px-3 py-3">Get Started</Link>
+                            <button className="rounded text-black text-lg font-medium bg-white md:px-8 px-3 py-3">Request a demo</button>
                         </div>
                     </div>
                     <div className="md:w-1/2 w-full flex justify-center">

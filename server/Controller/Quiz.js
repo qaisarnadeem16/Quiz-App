@@ -2,6 +2,8 @@ const express = require('express');
 const Quiz = require('../Model/Quiz');
 const Question = require('../Model/Questions');
 const router = express.Router();
+const ErrorHandler = require('../Utils/ErrorHandler');
+
 
 router.post('/scheduleQuiz', async (req, res) => {
     try {
@@ -154,7 +156,49 @@ router.get('/adminQuizzes', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch quizzes' });
     }
   });
-  
+
+
+  // DELETE route for deleting a quiz
+router.delete('/deleteQuiz/:quizId', async (req, res) => {
+  const { quizId } = req.params;
+  try {
+    await Quiz.findByIdAndDelete(quizId);
+
+    res.status(200).json({ message: 'Question deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error deleting the question' });
+  }
+});
+
+
+  //fetch a quiz by its id
+router.get('/getQuiz/:id', async (req, res ,next) => {
+  try {
+    const { id } = req.params;
+    const question = await Quiz.findById(id);
+
+    res.status(200).json({ question });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+
+// Update a quiz by its id
+router.put('/updateQuiz/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedQuiz = req.body;
+    // Update the quiz in the database
+    const quiz = await Quiz.findByIdAndUpdate(id, updatedQuiz, { new: true });
+
+    res.status(200).json({ quiz });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update quiz' });
+  }
+});
+
 
   
   

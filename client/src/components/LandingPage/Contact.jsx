@@ -4,7 +4,7 @@ import { AiFillCheckCircle } from 'react-icons/ai'
 
 const Contact = () => {
     return (
-        <>
+        <div id='contact'>
             <div className="py-5">
                 <div className="relative h-screen">
                     <img src={img} alt="" className='md:w-[1872px] h-screen md:block hidden' />
@@ -58,7 +58,7 @@ const Contact = () => {
 
 
 
-        </>
+        </div>
     )
 }
 

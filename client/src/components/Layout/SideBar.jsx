@@ -2,14 +2,17 @@ import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import logo from '../../Assets/iQzeto.png';
 import { HiOutlineHome } from 'react-icons/hi';
-import { BsBox } from 'react-icons/bs';
+import { BsBox, BsFillBagDashFill } from 'react-icons/bs';
 import { IoTimeOutline } from 'react-icons/io5';
 import { AiOutlineSchedule, AiOutlineUser } from 'react-icons/ai';
 import { GiWallet } from 'react-icons/gi';
 import { RiUserSettingsLine } from 'react-icons/ri';
 import { VscChecklist } from 'react-icons/vsc';
+import { useSelector } from 'react-redux';
 
 const SideBar = ({ setActive, active, isSidebarVisible }) => {
+    const { user } = useSelector((state) => state.user);
+
     const location = useLocation();
 
     const isActive = (path) => {
@@ -21,7 +24,9 @@ const SideBar = ({ setActive, active, isSidebarVisible }) => {
             <div className={`md:rounded-lg md:block bg-[#00459E] md:px-1 z-30 md:mt-2 w-[65%] md:w-[20%] md:relative absolute ${isSidebarVisible ? 'hidden' : 'block absolute'} h-screen`} id="responsiveSideBar" >
 
                 <div className="flex justify-center py-4">
-                    <img src={logo} alt="" />
+                    <Link to='/'>
+                        <img src={logo} alt="" />
+                    </Link>
                 </div>
                 <div className="pt-5">
                     <ul className="px-3 mx-auto flex flex-col gap-3">
@@ -70,20 +75,43 @@ const SideBar = ({ setActive, active, isSidebarVisible }) => {
                             </Link>
                         </div>
 
-                        <div onClick={() => setActive(6)}>
-                            <Link to="/dashboard/userManagement">
-                                <li className={`text-white flex gap-2 p-2 rounded-md text-lg font-medium cursor-pointer ${isActive('/dashboard/userManagement')}`}>
-                                    <RiUserSettingsLine className="text-[1.4rem]" />
-                                    User Management
-                                </li>
-                            </Link>
-                        </div>
+                        {user.role === 'admin' ?
+                            <div onClick={() => setActive(6)}>
+                                <Link to="/dashboard/userManagement">
+                                    <li className={`text-white flex gap-2 p-2 rounded-md text-lg font-medium cursor-pointer ${isActive('/dashboard/userManagement')}`}>
+                                        <RiUserSettingsLine className="text-[1.4rem]" />
+                                        User Management
+                                    </li>
+                                </Link>
+                            </div>
+                            : null}
+                        {user.role === 'admin' ?
+                            <div onClick={() => setActive(7)}>
+                                <Link to="/dashboard/AdminQuiz">
+                                    <li className={`text-white flex gap-2 p-2 rounded-md text-md font-medium cursor-pointer ${isActive('/dashboard/AdminQuiz')}`}>
+                                        <AiOutlineSchedule className="text-[1.4rem]" />
+                                        Admin Scheduled Quiz
+                                    </li>
+                                </Link>
+                            </div>
+                            : null}
 
-                        <div onClick={() => setActive(7)}>
-                            <Link to="/dashboard/AdminQuiz">
-                                <li className={`text-white flex gap-2 p-2 rounded-md text-md font-medium cursor-pointer ${isActive('/dashboard/AdminQuiz')}`}>
-                                    <AiOutlineSchedule className="text-[1.4rem]" />
-                                    Admin Scheduled Quiz
+                        {user.role === 'admin' ?
+                            <div onClick={() => setActive(10)}>
+                                <Link to="/dashboard/addQuizPkg">
+                                    <li className={`text-white flex gap-2 p-2 rounded-md text-md font-medium cursor-pointer ${isActive('/dashboard/addQuizPkg')}`}>
+                                        <AiOutlineSchedule className="text-[1.4rem]" />
+                                        Add Quiz Package
+                                    </li>
+                                </Link>
+                            </div>
+                            : null}
+
+                        <div onClick={() => setActive(11)}>
+                            <Link to="/dashboard/userJoinPkg">
+                                <li className={`text-white flex gap-2 p-2 rounded-md text-md font-medium cursor-pointer ${isActive('/dashboard/userJoinPkg')}`}>
+                                    <BsFillBagDashFill className="text-[1.4rem]" />
+                                    User Joined Package
                                 </li>
                             </Link>
                         </div>
@@ -92,10 +120,12 @@ const SideBar = ({ setActive, active, isSidebarVisible }) => {
                             <Link to="/dashboard/userQuiz">
                                 <li className={`text-white flex gap-2 p-2 rounded-md text-md font-medium cursor-pointer ${isActive('/dashboard/userQuiz')}`}>
                                     <AiOutlineSchedule className="text-[1.4rem]" />
-                                    User Scheduled Quiz
+                                    My Scheduled Quiz
                                 </li>
                             </Link>
                         </div>
+
+
 
                         <div onClick={() => setActive(9)}>
                             <Link to="/dashboard/playedQuiz">

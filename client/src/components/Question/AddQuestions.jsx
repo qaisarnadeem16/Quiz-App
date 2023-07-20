@@ -2,13 +2,10 @@ import React, { useState } from 'react'
 // import { RiArrowDropDownLine } from 'react-icons/ri'
 import AddMcqs from './AddMcqs';
 import FillInBlank from './FillInBlank';
-import DragAndDrop from './DragAndDrop';
-
 
 const questionType = [
     { id: 1, name: 'MCQs' },
     { id: 2, name: 'Fill In Blank' },
-    { id: 3, name: 'Drag and Drop' }
 ]
 const AddQuestions = () => {
     const [selectedOption, setSelectedOption] = useState('');
@@ -88,9 +85,7 @@ const AddQuestions = () => {
             {selectedComponent && selectedComponent.name === 'Fill In Blank' && (
                 <FillInBlank selectedOption={selectedOption} selectedComponent={selectedComponent}/>
             )}
-             {selectedComponent && selectedComponent.name === 'Drag and Drop' && (
-                <DragAndDrop selectedOption={selectedOption} selectedComponent={selectedComponent}/>
-            )}
+         
 
         </>
     )
