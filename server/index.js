@@ -15,6 +15,7 @@ app.use(
     cors({
       origin: "https://quizapp-black.vercel.app",
       credentials: true,
+      Access-Control-Allow-Origin: https://quizapp-black.vercel.app
     })
   );
   app.use("/", express.static("uploads"));
