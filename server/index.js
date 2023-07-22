@@ -13,12 +13,11 @@ app.use(cookieParser());
 
 app.use(
     cors({
-      origin: ["https://quizapp-black.vercel.app"],
+      origin: "http://localhost:3000",
       credentials: true,
+      
     })
-);
-    next();
-});
+  );
   app.use("/", express.static("uploads"));
 app.listen(port , ()=>{
     console.log(`listening on port ${port}`)
