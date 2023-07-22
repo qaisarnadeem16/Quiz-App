@@ -13,7 +13,7 @@ app.use(cookieParser());
 
 app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: "https://quiz-app-frontend-phi.vercel.app",
       credentials: true,
       
     })
